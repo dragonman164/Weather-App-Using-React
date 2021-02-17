@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { Helmet } from 'react-helmet'
 import Weather from './app_component/weather-component';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'weather-icons/css/weather-icons.css';
@@ -76,7 +77,7 @@ function App() {
 
     if(city && country)
     {
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
+    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
     const response = await api_call.json()
     WeatherData({
       city:`${response.name} , ${response.sys.country}`,
@@ -113,6 +114,9 @@ function App() {
  
   return (
     <div className="App">
+      <Helmet>
+          <title>Weather App</title>
+        </Helmet>
     <Form loadweather={getWeather} error={weather.error}/>
      <Weather city={weather.city}
        temp_celsius = {weather.celsius}
